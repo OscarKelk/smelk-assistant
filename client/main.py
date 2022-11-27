@@ -3,7 +3,7 @@ import json
 import pathlib
 import time
 
-from base import smelkassistant
+from smelk_assistant_base import smelkassistant
 
 config = {}
 data = {}
@@ -63,18 +63,27 @@ if data["program_opened"] < 2:  # Display primary welcome message only on first 
     print("Hi, I'm the Smelk Innovations Personal Assistant.")
     print("I'm here to help you in whatever way possible, there are many things I can do!")
 
+print("Type <exit> to leave")
 print("How can we get started?")
-user_input = input("> ")
-assistant_response = smelkassistant.parse_input(user_input)
+while True:
+    user_input = input("> ")
+    if user_input == "<exit>":
+        break
+    assistant_response = smelkassistant.parse_input(user_input)
 
-# Log questions to data and history
-if "questions_asked" not in data:
-    data["questions_asked"] = 0
-data["questions_asked"] += 1
-log_history(user_input, assistant_response)
+    # Log questions to data and history
+    if "questions_asked" not in data:
+        data["questions_asked"] = 0
+    data["questions_asked"] += 1
+    log_history(user_input, assistant_response)
 
-print("\n" + assistant_response)
-print("\n")
+    print("\n", end="")
+    print(assistant_response)
+    print("\n", end="")
+
+    save_data()
+    save_history()
 
 save_data()
 save_history()
+exit()
