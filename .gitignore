@@ -1,3 +1,4 @@
+client/config.json
 client/data.json
 client/history.json
 *.pyc

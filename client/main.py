@@ -2,6 +2,7 @@
 import json
 import pathlib
 import time
+import os
 
 from smelk_assistant_base import smelkassistant
 
@@ -12,22 +13,21 @@ history = []
 
 def create_program_files():
     # Check if files exist and create defaults if not so
-
-    if not pathlib.Path("config.json").is_file():
-        with open("config.json", "w") as f:
-            json.dump({"data_path": "data.json", "history_path": "history.json", "smelk_logo_path": "smelk_logo.txt"},
+    if not pathlib.Path("client/config.json").is_file():
+        with open("client/config.json", "w") as f:
+            json.dump({"data_path": "client/data.json", "history_path": "client/history.json", "smelk_logo_path": "client/smelk_logo.txt"},
                       f, indent=4)
 
-    if not pathlib.Path("data.json").is_file():
-        with open("data.json", "w") as f:
+    if not pathlib.Path("client/data.json").is_file():
+        with open("client/data.json", "w") as f:
             json.dump({"program_opened": 0, "questions_asked": 0}, f, indent=4)
 
-    if not pathlib.Path("history.json").is_file():
-        with open("history.json", "w") as f:
+    if not pathlib.Path("client/history.json").is_file():
+        with open("client/history.json", "w") as f:
             json.dump([], f, indent=4)
 
-    if not pathlib.Path("smelk_logo.txt").is_file():
-        with open("smelk_logo.txt", "w") as f:
+    if not pathlib.Path("client/smelk_logo.txt").is_file():
+        with open("client/smelk_logo.txt", "w") as f:
             f.write("    ________      ________\n"
                     "- ~|        |----|        |~ -\n"
                     "   |        |    |        |\n"
@@ -41,7 +41,7 @@ def create_program_files():
 
 def load_config():
     global config
-    with open("config.json", "r") as f:
+    with open("client/config.json", "r") as f:
         config = json.load(f)
 
 
