@@ -2,7 +2,6 @@
 import json
 import pathlib
 import time
-import os
 
 from smelk_assistant_base import smelkassistant
 
